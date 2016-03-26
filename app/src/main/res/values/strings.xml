@@ -2,5 +2,6 @@
     <string name="app_name">Factly</string>
 
     <!-- App strings -->
-    <string name="welcome">Hello World!</string>
+    <string name="latitudeText">Latitude: </string>
+    <string name="longitudeText">Longitude: </string>
 </resources>
