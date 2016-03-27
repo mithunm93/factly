@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private LocationConnectionManager mLocationConnectionManager;
 
     private final static String MAIN_ACTIVITY_TAG = "MAIN_ACTIVITY";
-    public final static int MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION = 0;
+    public final static int MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
     public boolean updateLocation() {
         if (!mLocationConnectionManager.isConnected()) return false;
-        int locationPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
+        int locationPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
 
         // Can only get location if we have permission
         if (locationPermission == PackageManager.PERMISSION_GRANTED){
@@ -73,8 +73,8 @@ public class MainActivity extends AppCompatActivity {
             lonText.setText(String.valueOf(loc.getLongitude()));
         } else {
             ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
-                    MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION);
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
         }
 
         return true;
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
         switch (requestCode) {
-            case MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION: {
+            case MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION: {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
                     this.updateLocation();
