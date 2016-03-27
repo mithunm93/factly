@@ -2,6 +2,13 @@
     <string name="app_name">Factly</string>
 
     <!-- App strings -->
-    <string name="latitudeText">Latitude: </string>
-    <string name="longitudeText">Longitude: </string>
+    <string name="latitudeText">Latitude:</string>
+    <string name="longitudeText">Longitude:</string>
+    <string name="zipText">Zip Code:</string>
+
+    <!-- Intent Service Tags -->
+    <string name="service_not_available">The Geocoder Service is not available</string>
+    <string name="invalid_lat_long_used">Invalid lat/long</string>
+    <string name="no_address_found">No address found for that Location</string>
+    <string name="address_found">Address received</string>
 </resources>

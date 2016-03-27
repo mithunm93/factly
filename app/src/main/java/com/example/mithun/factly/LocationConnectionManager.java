@@ -1,13 +1,9 @@
 package com.example.mithun.factly;
 
-import android.Manifest;
 import android.app.Activity;
-import android.content.Context;
-import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -20,11 +16,7 @@ import com.google.android.gms.location.LocationServices;
 public class LocationConnectionManager
     implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
-    private LocationConnectionManager locationConnectionManager;
     private GoogleApiClient mGoogleApiClient;
-    private Location mLastLocation;
-    private Activity mActivity;
-
     private final static String LOCATION_MANAGER_TAG = "LOCATION_MANAGER";
 
     public LocationConnectionManager(Activity activity) {
@@ -36,7 +28,6 @@ public class LocationConnectionManager
                 .addApi(LocationServices.API)
                 .build();
         }
-        mActivity = activity;
     }
 
     // GOOGLE API CLIENT METHODS
@@ -44,7 +35,7 @@ public class LocationConnectionManager
     public void onConnectionSuspended(int i) {Log.i(LOCATION_MANAGER_TAG, "Connection suspended");}
 
     @Override
-    public void onConnectionFailed(ConnectionResult connectionResult) {Log.e(LOCATION_MANAGER_TAG, "Connection failed");}
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {Log.e(LOCATION_MANAGER_TAG, "Connection failed");}
 
     @Override
     public void onConnected(Bundle connectionHint) {Log.i(LOCATION_MANAGER_TAG, "Connection successful"); }
@@ -56,7 +47,7 @@ public class LocationConnectionManager
     public void disconnect() {mGoogleApiClient.disconnect();}
 
     public Location getLastLocation() throws SecurityException {
-        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
         if (mLastLocation != null) {
             Log.i(LOCATION_MANAGER_TAG, String.valueOf(mLastLocation.getLatitude()));
             Log.i(LOCATION_MANAGER_TAG, String.valueOf(mLastLocation.getLongitude()));
